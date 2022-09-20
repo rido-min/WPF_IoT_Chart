@@ -5,6 +5,6 @@
     "protobufjs-cli": "^1.0.2"
   },
   "scripts": {
-    "protos" : "node ./node_modules/protobufjs-cli/bin/pbjs -t static-module -es6  -w es6 mqttdevice.proto > mqttdevice.js"
+    "protos" : "node ./node_modules/protobufjs-cli/bin/pbjs -t json  mqttdevice.proto > mqttdevice.json"
   }
 }
