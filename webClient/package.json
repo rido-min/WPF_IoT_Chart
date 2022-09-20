@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "install": "^0.13.0",
+    "npm": "^8.19.2",
+    "protobufjs-cli": "^1.0.2"
+  },
+  "scripts": {
+    "protos" : "node ./node_modules/protobufjs-cli/bin/pbjs -t static-module -es6  -w es6 mqttdevice.proto > mqttdevice.js"
+  }
+}

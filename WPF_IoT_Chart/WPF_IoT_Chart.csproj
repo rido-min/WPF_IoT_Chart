@@ -2,14 +2,17 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1-windows7.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.71" />
-    <PackageReference Include="MQTTnet" Version="3.0.16" />
+    <PackageReference Include="MQTTnet.Extensions.MultiCloud.BrokerIoTClient" Version="0.2.32" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\mqttdeviceProtos\mqttdeviceProtos.csproj" />
+  </ItemGroup>
 </Project>

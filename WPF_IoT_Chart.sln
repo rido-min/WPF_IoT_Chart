@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_IoT_Chart", "WPF_IoT_Chart\WPF_IoT_Chart.csproj", "{DCE0FB25-BC93-4744-ACE5-225BDE3B9F04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_IoT_Chart", "WPF_IoT_Chart\WPF_IoT_Chart.csproj", "{DCE0FB25-BC93-4744-ACE5-225BDE3B9F04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mqttdeviceProtos", "mqttdeviceProtos\mqttdeviceProtos.csproj", "{0B4F8171-E0BC-4252-9CA4-E17CB53B83FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DCE0FB25-BC93-4744-ACE5-225BDE3B9F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCE0FB25-BC93-4744-ACE5-225BDE3B9F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCE0FB25-BC93-4744-ACE5-225BDE3B9F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4F8171-E0BC-4252-9CA4-E17CB53B83FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4F8171-E0BC-4252-9CA4-E17CB53B83FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4F8171-E0BC-4252-9CA4-E17CB53B83FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4F8171-E0BC-4252-9CA4-E17CB53B83FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
