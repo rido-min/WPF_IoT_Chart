@@ -4,6 +4,8 @@ using LiveChartsCore.SkiaSharpView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace WPF_IoT_Chart
@@ -42,9 +44,11 @@ namespace WPF_IoT_Chart
                     Fill = null
                 }
             };
+            sdkInfo = "";
         }
 
         public ObservableCollection<ISeries> Series { get; set; }
+        public string  sdkInfo { get; set; }
 
         public void AddItem(double t)
         {

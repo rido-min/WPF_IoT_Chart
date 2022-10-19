@@ -2,7 +2,9 @@
 using MQTTnet.Extensions.MultiCloud.BrokerIoTClient;
 using MQTTnet.Extensions.MultiCloud.Connections;
 using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace WPF_IoT_Chart
@@ -22,10 +24,21 @@ namespace WPF_IoT_Chart
         public double Temperature { get; }
     }
 
+    public class PropertyEventArgs: EventArgs
+    {
+        public PropertyEventArgs()
+        {
+            Props = new Dictionary<string, object>();
+        }
+        public Dictionary<string, object> Props{ get; set; }
+    }
+
+
     class HubBrokerClient
     {
         public event EventHandler<TemperatureEventArgs>? OnTelemetryReceived;
-        //public event EventHandler? OnDisconnect;
+        public event EventHandler? OnDisconnect;
+        public event EventHandler<PropertyEventArgs>? OnPropertyReceived;
         public async Task ConnectAndSub()
         {
 
@@ -36,34 +49,32 @@ namespace WPF_IoT_Chart
                 X509Key = "7E555E6FFE3D0A7F0F63A7E411094341B9293864",
             };
             var mqttClient = await BrokerClientFactory.CreateFromConnectionSettingsAsync(cs, false);
-
+            mqttClient.DisconnectedAsync += async ea => OnDisconnect?.Invoke(this, ea);
             
 
             mqttClient.ApplicationMessageReceivedAsync += async e =>
             {
                 Console.WriteLine("Message received");
                 Console.WriteLine($"{e.ClientId} {e.ApplicationMessage.Topic} {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                var topic = e.ApplicationMessage.Topic;
                 var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-                TemperatureMessage jsonPayload = System.Text.Json.JsonSerializer.Deserialize<TemperatureMessage>(payload);
+                if (topic.Contains("telemetry"))
+                {
+                    TemperatureMessage jsonPayload = JsonSerializer.Deserialize<TemperatureMessage>(payload)!;
+                    OnTelemetryReceived?.Invoke(this, new TemperatureEventArgs(jsonPayload.temp));
+                    await Task.Yield();
+                }
+                if (topic.Contains("props/sdkInfo"))
+                {
+                    var propVal = JsonSerializer.Deserialize<string>(payload)!;
+                    PropertyEventArgs peg = new PropertyEventArgs();
+                    peg.Props.Add("sdkInfo", propVal);
+                    OnPropertyReceived?.Invoke(this, peg);
+                }
 
-                //var tel = Telemetry.Parser.ParseFrom(e.ApplicationMessage.Payload);
-                OnTelemetryReceived?.Invoke(this, new TemperatureEventArgs(jsonPayload.temp));
-                await Task.Yield();
+
             };
-            await mqttClient.SubscribeAsync(new MqttClientSubscribeOptionsBuilder().WithTopicFilter("device/+/telemetry/temp").Build());
-
-            
-            //MqttNetGlobalLogger.LogMessagePublished += (s, e) =>
-            //{
-            //    var trace = $">> [{e.TraceMessage.Timestamp:O}] [{e.TraceMessage.ThreadId}] [{e.TraceMessage.Source}] [{e.TraceMessage.Level}]: {e.TraceMessage.Message}";
-            //    if (e.TraceMessage.Exception != null)
-            //    {
-            //        trace += Environment.NewLine + e.TraceMessage.Exception.ToString();
-            //    }
-
-            //    System.Diagnostics.Debug.WriteLine(trace);
-            //};
-
+            await mqttClient.SubscribeAsync(new MqttClientSubscribeOptionsBuilder().WithTopicFilter("device/#").Build());
             System.Diagnostics.Debug.WriteLine(mqttClient.IsConnected);
         }
     }

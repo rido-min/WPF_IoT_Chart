@@ -11,8 +11,29 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Button Click="Button_Click" x:Name="ButtonConnect">Connect to Broker</Button>
         <lvc:CartesianChart Series="{Binding Series}" Grid.Row="1"></lvc:CartesianChart >
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <TextBlock  Grid.Column="0" Text="sdkInfo: " HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="1" Text="{Binding sdkInfo}"  HorizontalAlignment="Left"/>
+            <TextBlock  Grid.Column="2" Text="Interval: " HorizontalAlignment="Right" />
+            <TextBox Grid.Column="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="20" />
+            <Button Grid.Column="4">Echo</Button>
+        </Grid>
     </Grid>
 </Window>
+
+    
