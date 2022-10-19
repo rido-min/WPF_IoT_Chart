@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.71" />
-    <PackageReference Include="MQTTnet" Version="3.0.16" />
+    <PackageReference Include="MQTTnet.Extensions.MultiCloud.BrokerIoTClient" Version="0.5.1" />
   </ItemGroup>
 
 </Project>
