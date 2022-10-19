@@ -32,7 +32,7 @@ namespace WPF_IoT_Chart
         {
             HubBrokerClient c = new HubBrokerClient();
             c.OnTelemetryReceived += C_OnTelemetryReceived;
-            c.OnDisconnect += C_OnDisconnect;
+            //c.OnDisconnect += C_OnDisconnect;
             await c.ConnectAndSub();
             ButtonConnect.IsEnabled = false;
         }

@@ -4,7 +4,6 @@ using MQTTnet.Extensions.MultiCloud.Connections;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using mqttdeviceProtos;
 
 namespace WPF_IoT_Chart
 {
@@ -37,6 +36,8 @@ namespace WPF_IoT_Chart
                 X509Key = "7E555E6FFE3D0A7F0F63A7E411094341B9293864",
             };
             var mqttClient = await BrokerClientFactory.CreateFromConnectionSettingsAsync(cs, false);
+
+            
 
             mqttClient.ApplicationMessageReceivedAsync += async e =>
             {
